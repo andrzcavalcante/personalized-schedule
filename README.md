@@ -17,6 +17,13 @@ Abaixo estará toda organização e explicação do funcionamento da API(Schedul
 | PATCH  | /users/:id  | Atualizar usuário por id |
 | DELETE | /users/:id  | Deletar usuários por id   |
 
+| Método | Endpoint    | Responsabilidade       |
+| ------ | ----------- | ---------------------- |
+| POST   | /contacts      | Criar os contatos       |
+| GET    | /contacts      | Listar todos os contatos|
+| PATCH  | /contacts/:id  | Atualizar contato por id |
+| DELETE | /contacts/:id  | Deletar contato por id   |
+
 
 ## Regras da aplicação
 
@@ -44,16 +51,6 @@ Abaixo estará toda organização e explicação do funcionamento da API(Schedul
 
 -  A rota **Delete /users/:userId**, deleta a conta do usuário.
 -  Obs: Apenas o usuário dono da conta tem acesso a esses dados.
-
-## Endpoints da aplicação
-
-| Método | Endpoint    | Responsabilidade       |
-| ------ | ----------- | ---------------------- |
-| POST   | /contacts      | Criar os contatos       |
-| GET    | /contacts      | Listar todos os contatos|
-| PATCH  | /contacts/:id  | Atualizar contato por id |
-| DELETE | /contacts/:id  | Deletar contato por id   |
-
 
 ## Regras da aplicação
 
