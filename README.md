@@ -6,6 +6,7 @@ Neste repositório está toda estrutura da aplicação *SchedulesUp* do FrontEnd
 sempre presando os pilares da segurança da informação: confidencialidade, integridade e disponibilidade.
 Abaixo estará toda organização e explicação do funcionamento da API(SchedulesUp) e detalhes de uso do FrontEnd. 
 
+## BackEnd
 
 ## Endpoints da aplicação
 
@@ -27,6 +28,8 @@ Abaixo estará toda organização e explicação do funcionamento da API(Schedul
 ### Post /users 
 
 -  A rota **Post /users**, cria um novo usuário.
+-  Deve receber os seguintes dados de forma obrigatória:
+    -  Nome completo, Email, Telefone e Senha.
 -  A senha da usuário é "hashada" no momento da criação.
 -  Obs: O email de cadastro é único, sendo assim, só podendo ser utilizado uma vez por conta. 
 
@@ -39,5 +42,39 @@ Abaixo estará toda organização e explicação do funcionamento da API(Schedul
 
 ### Delete /users/:userId  
 
--  A rota **Delete /users/:userId**, delete a conta do usuário.
+-  A rota **Delete /users/:userId**, deleta a conta do usuário.
 -  Obs: Apenas o usuário dono da conta tem acesso a esses dados.
+
+## Endpoints da aplicação
+
+| Método | Endpoint    | Responsabilidade       |
+| ------ | ----------- | ---------------------- |
+| POST   | /contacts      | Criar os contatos       |
+| GET    | /contacts      | Listar todos os contatos|
+| PATCH  | /contacts/:id  | Atualizar contato por id |
+| DELETE | /contacts/:id  | Deletar contato por id   |
+
+
+## Regras da aplicação
+
+### GET /contacts
+
+-   A rota **GET /contacts**, listar todos os dados dos contatos cadastrados.
+
+### Post /contacts 
+
+-  A rota **Post /users**, cria um novo contato.
+-  Deve receber os seguintes dados de forma obrigatória:
+    -  Nome completo, Email e Telefone.
+
+### Update /contacts/:userId 
+
+-  A rota **Update /contacts/:contactId**, atualiza todos os dados do contato.
+-  Obs: Apenas o usuário dono da conta tem acesso a esses dados.
+
+
+### Delete /contacts/:userId  
+
+-  A rota **Delete /contacts/:contactId**, deleta o contato.
+-  Obs: Apenas o usuário dono da conta tem acesso a esses dados.
+
