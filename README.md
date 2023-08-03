@@ -15,7 +15,7 @@ Abaixo estará toda organização e explicação do funcionamento da API(Schedul
    -  **cd front/**
    -  Faça a instalação de todas as dependências:
         -  **npm install** ou **yarn install**
-- Por fim, use o comando **npm run dev** ou **yarn dev** para startar a aplicação. 
+- Por fim, use o comando ***npm run dev*** ou ***yarn dev*** para startar a aplicação. 
 
        
 
