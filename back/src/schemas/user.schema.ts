@@ -4,9 +4,9 @@ const userSchema = z.object({
   id: z.number(),
   full_name: z.string(),
   email: z.string().email(),
-  phone: z.number(),
+  phone: z.string(),
   password: z.string(),
-  createAt: z.string().optional(),
+  createAt: z.date().optional(),
 });
 
 const userSchemaRequest = userSchema.omit({

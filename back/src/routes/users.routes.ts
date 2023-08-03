@@ -14,14 +14,14 @@ const userRoutes = Router();
 
 userRoutes.post("", ensureDataIsValid(userSchemaRequest), createUserController);
 userRoutes.get(
-  "/:id",
+  "",
   ensureAuthMiddleware,
-  ensurePermissionMidlleware,
   listUserController
 );
 userRoutes.patch(
   "/:id",
   ensureAuthMiddleware,
+  ensurePermissionMidlleware,
   ensureDataIsValid(userSchemaUpdate),
   updateUserController
 );

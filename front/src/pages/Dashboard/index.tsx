@@ -1,57 +1,113 @@
-import { Container, Header } from "./style";
+import { Container, Header, Menu } from "./style";
 import { BiUserCircle } from "react-icons/bi";
 import { FiMenu } from "react-icons/fi";
-import { ModalUpdateContact } from "../../components/Modals/modalUpdateContact";
-import { ModalDeleteContact } from "../../components/Modals/modalDeleteContact";
+import { GrClose } from "react-icons/gr";
 import { ModalAddContact } from "../../components/Modals/modalAddContact";
 import { ModalUpdateUser } from "../../components/Modals/modalUpdateUser";
-import { useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { Link } from "react-router-dom";
+import { Card } from "../../components/Card";
+import { useAuth } from "../../hooks/useAuth";
+import { AuthContext } from "../../providers/AuthProvider";
+import { api } from "../../services/api";
+import { ModalDeleteUser } from "../../components/Modals/modalDeleteUser";
+import { SearchContact } from "../../components/SeachContact";
+
+export interface Contact {
+  id: string;
+  full_name: string;
+  email: string;
+  phone: string;
+}
 
 export const Dashboard = () => {
-  const [openModalUpdate, setOpenModalUpdate] = useState(false);
-  const [openModalDelete, setOpenModalDelete] = useState(false);
   const [openModalAdd, setOpenModalAdd] = useState(false);
+  const [openModalDeleteUser, setOpenModalDeleteUser] = useState(false);
   const [openModalUpdateUser, setOpenModalUpdateUser] = useState(false);
+  const [contacts, setContacts] = useState([]);
+  const [menuMobile, setMenuMobile] = useState(false);
+  const { logout } = useAuth();
+
+  const { user } = useContext(AuthContext);
+
+  useEffect(() => {
+    const listContact = async () => {
+      try {
+        const response = await api.get("/contacts");
+
+        setContacts(response.data);
+      } catch (error) {
+        console.log(error);
+      }
+    };
+
+    listContact();
+  }, []);
 
   return (
     <Container>
       <Header>
-        <Link to={`/`} className="logout hidden">
+        <Link onClick={logout} to={`/`} className="logout hidden">
           <button>Sair</button>
         </Link>
-        <div className="profile_user">
-          <div className="icon_user">
-            <BiUserCircle size={35} />
+        <div className="box_header">
+          <div className="profile_user">
+            <div className="icon_user">
+              <BiUserCircle size={35} />
+            </div>
+            <h2>Olá, {user.full_name}</h2>
           </div>
-          <h2>Olá, André Cavalcante</h2>
-        </div>
-        <div className="update_box hidden">
-          <div>
-            <h2>Seus dados</h2>
+          <div className="update_box hidden">
+            <div>
+              <h2>Seus dados</h2>
+            </div>
+            <p>
+              Nome: <span>{user.full_name}</span>
+            </p>
+            <p>
+              Telefone: <span>{user.phone}</span>
+            </p>
+            <p>
+              Email: <span>{user.email}</span>
+            </p>
+            <div className="buttons_profile">
+              <button
+                className="update"
+                onClick={() => setOpenModalUpdateUser(true)}
+              >
+                ATUALIZAR DADOS
+              </button>
+              <button
+                className="delete"
+                onClick={() => setOpenModalDeleteUser(true)}
+              >
+                DELETAR CONTA
+              </button>
+            </div>
           </div>
-          <p>
-            Nome: <span>Igor</span>
-          </p>
-          <p>
-            Telefone: <span>8299999999</span>
-          </p>
-          <p>
-            Email: <span>igor@mail.com</span>
-          </p>
-          <button onClick={() => setOpenModalUpdateUser(true)}>
-            ATUALIZAR DADOS
-          </button>
+          <div
+            onClick={() => setMenuMobile(!menuMobile)}
+            className="hidden_desktop"
+          >
+            {menuMobile ? <GrClose size={28} /> : <FiMenu size={30} />}
+          </div>
         </div>
-        <div className="hidden_desktop">
-          <FiMenu size={30} />
-        </div>
+        {menuMobile ? (
+          <>
+            <Menu>
+              <span onClick={() => setOpenModalUpdateUser(true)}>
+                Atualizar dados
+              </span>
+              <span onClick={() => setOpenModalDeleteUser(true)}>
+                Deletar conta
+              </span>
+              <span onClick={logout}>Logout</span>
+            </Menu>
+          </>
+        ) : null}
       </Header>
       <section>
-        <div className="search_box">
-          <input type="text" placeholder="Busque seu contato aqui" />
-          <button>Buscar</button>
-        </div>
+        <SearchContact setContact={setContacts} />
         <div className="header_list_contact">
           <h2>Lista de contatos</h2>
           <div>
@@ -62,114 +118,20 @@ export const Dashboard = () => {
           </div>
         </div>
         <div className="box_cards">
-          <ul>
-            <li className="card">
-              <div>
-                <p>
-                  Nome: <span>Igor</span>
-                </p>
-                <p>
-                  Telefone: <span>8299999999</span>
-                </p>
-                <p>
-                  Email: <span>igor@mail.com</span>
-                </p>
-                <div className="buttons_card">
-                  <button onClick={() => setOpenModalUpdate(true)}>
-                    Atualizar
-                  </button>
-                  <button
-                    className="remove"
-                    onClick={() => setOpenModalDelete(true)}
-                  >
-                    Excluir
-                  </button>
-                </div>
-              </div>
-            </li>
-            <li className="card">
-              <div>
-                <p>
-                  Nome: <span>Igor</span>
-                </p>
-                <p>
-                  Telefone: <span>8299999999</span>
-                </p>
-                <p>
-                  Email: <span>igor@mail.com</span>
-                </p>
-                <div className="buttons_card">
-                  <button onClick={() => setOpenModalUpdate(true)}>
-                    Atualizar
-                  </button>
-                  <button
-                    className="remove"
-                    onClick={() => setOpenModalDelete(true)}
-                  >
-                    Excluir
-                  </button>
-                </div>
-              </div>
-            </li>
-            <li className="card">
-              <div>
-                <p>
-                  Nome: <span>Igor</span>
-                </p>
-                <p>
-                  Telefone: <span>8299999999</span>
-                </p>
-                <p>
-                  Email: <span>igor@mail.com</span>
-                </p>
-                <div className="buttons_card">
-                  <button onClick={() => setOpenModalUpdate(true)}>
-                    Atualizar
-                  </button>
-                  <button
-                    className="remove"
-                    onClick={() => setOpenModalDelete(true)}
-                  >
-                    Excluir
-                  </button>
-                </div>
-              </div>
-            </li>
-            <li className="card">
-              <div>
-                <p>
-                  Nome: <span>Igor</span>
-                </p>
-                <p>
-                  Telefone: <span>8299999999</span>
-                </p>
-                <p>
-                  Email: <span>igor@mail.com</span>
-                </p>
-                <div className="buttons_card">
-                  <button onClick={() => setOpenModalUpdate(true)}>
-                    Atualizar
-                  </button>
-                  <button
-                    className="remove"
-                    onClick={() => setOpenModalDelete(true)}
-                  >
-                    Excluir
-                  </button>
-                </div>
-              </div>
-            </li>
-          </ul>
+          {contacts.length > 0 ? (
+            <ul>
+              {contacts.map((contact) => (
+                <Card key={contact.id} contact={contact} />
+              ))}
+            </ul>
+          ) : (
+            <div className="listEmpty">
+              <p>Você não possue contatos</p>
+            </div>
+          )}
         </div>
       </section>
-      <ModalUpdateContact
-        isOpen={openModalUpdate}
-        setOpenModalUpdate={() => setOpenModalUpdate(!openModalUpdate)}
-      />
-      <ModalDeleteContact
-        isOpen={openModalDelete}
-        setOpenModalDelete={() => setOpenModalDelete(!openModalDelete)}
-      />
+
       <ModalAddContact
         isOpen={openModalAdd}
         setOpenModalAdd={() => setOpenModalAdd(!openModalAdd)}
@@ -179,6 +141,14 @@ export const Dashboard = () => {
         setOpenModalUpdateUser={() =>
           setOpenModalUpdateUser(!openModalUpdateUser)
         }
+        userId={user.id}
+      />
+      <ModalDeleteUser
+        isOpen={openModalDeleteUser}
+        setOpenModalDeleteUser={() =>
+          setOpenModalDeleteUser(!openModalDeleteUser)
+        }
+        userId={user.id}
       />
     </Container>
   );

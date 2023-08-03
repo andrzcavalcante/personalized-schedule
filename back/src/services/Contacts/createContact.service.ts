@@ -24,16 +24,19 @@ const createContactService = async (
     throw new AppError("User not found", 404);
   }
 
-  const contact = contactRepository.create({
-    ...data,
-    user,
-  });
+  try {
+    const contact = contactRepository.create({
+      ...data,
+      user,
+    });
 
-  await contactRepository.save(contact);
+    await contactRepository.save(contact);
 
-  const returnContact = contactSchema.parse(user);
-
-  return returnContact;
+    return contactSchema.parse(contact);
+  } catch (error: any) {
+    console.log(error);
+    throw new Error(error.message);
+  }
 };
 
-export { createContactService }
+export { createContactService };

@@ -96,15 +96,28 @@ export const Container = styled.main`
   }
 
   .box_cards {
-    /* border: 2px solid #000; */
-
     height: 100%;
     width: 100%;
 
+    .listEmpty{
+      width: 100%;
+      height: 100%;
+      
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
+
+      p{
+        font-size: 20px;
+        font-weight: 600;
+        color: #c75126
+      }
+
+    }
     ul {
       display: flex;
       flex-wrap: wrap;
-      flex-direction: column;
       justify-content: space-between;
       align-items: center;
       gap: 0.5rem;
@@ -241,15 +254,23 @@ export const Container = styled.main`
 
 export const Header = styled.header`
   width: 100%;
-  height: 13vh;
+  min-height: 13vh;
 
   background-color: #c75126;
 
   display: flex;
-  justify-content: space-between;
+  flex-direction: column;
   align-items: center;
 
   padding: 0.5rem 1rem;
+
+  .box_header {
+    display: flex;
+    width: 100%;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0.8rem 0;
+  }
 
   .profile_user {
     display: flex;
@@ -286,6 +307,16 @@ export const Header = styled.header`
 
     display: flex;
     flex-direction: column;
+
+    .box_header {
+      display: flex;
+      height: 100vh;
+      width: 100%;
+      justify-content: space-between;
+      flex-direction: column;
+      align-items: center;
+      padding: 0.8rem 0;
+    }
 
     .logout {
       position: fixed;
@@ -359,8 +390,13 @@ export const Header = styled.header`
         }
       }
 
+      .buttons_profile {
+        display: flex;
+        justify-content: space-between;
+      }
+
       button {
-        color: #c75126;
+        width: 40%;
 
         font-weight: 600;
 
@@ -368,9 +404,36 @@ export const Header = styled.header`
         border: none;
 
         padding: 0.4rem 0;
+      }
 
+      .update {
+        color: #c75126;
         border: 2px solid #c75126;
+        background-color: #ffffff;
+      }
+
+      .delete {
+        color: #ffffff;
+        background-color: #ff0601;
       }
     }
+  }
+`;
+
+export const Menu = styled.nav`
+  padding: 1.5rem 0.5rem;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.8rem;
+
+  span {
+    color: #ffffff;
+    font-weight: 600;
+  }
+
+  span:hover {
+    font-size: 18px;
   }
 `;

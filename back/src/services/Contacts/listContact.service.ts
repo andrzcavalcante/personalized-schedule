@@ -19,14 +19,8 @@ const listContactService = async (userId: number): Promise<TContactsResponse> =>
   if (!user) {
     throw new AppError("User not found", 404);
   }
-
-  const contacts = await contactRepository.find({
-    where:{
-        user: !user
-    }
-  })
-
-  return contactsSchemaResponse.parse(contacts)
+  
+  return contactsSchemaResponse.parse(user.contacts)
 };
 
 export { listContactService }

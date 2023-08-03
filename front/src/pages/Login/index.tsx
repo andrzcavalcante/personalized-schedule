@@ -1,7 +1,18 @@
 import { Link } from "react-router-dom";
 import { Container, Logo, Form } from "./style";
+import { useForm } from "react-hook-form";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { TLoginData, loginSchema } from "../../schema/loginSchema";
+import { useAuth } from "../../hooks/useAuth";
 
 export const Login = () => {
+
+  const {register, handleSubmit} = useForm<TLoginData>({
+    resolver: zodResolver(loginSchema)
+  })
+
+  const {signIn} = useAuth()
+
   return (
     <Container>
         <Logo>
@@ -17,16 +28,16 @@ export const Login = () => {
       <section className="section_two">
         <p>O melhor software de agenda de contatos está aqui.</p>
       </section>
-      <Form action="">
+      <Form onSubmit={handleSubmit(signIn)}>
         <div>
           <h2>Login</h2>
         </div>
-        <label htmlFor="">Usuário</label>
-        <input type="text" placeholder="Digite seu nome de usuário" required/>
-        <label htmlFor="">Senha</label>
-        <input type="password" placeholder="Digite sua senha" required/>
+        <label htmlFor="email">Email</label>
+        <input type="email" id="email" placeholder="Digite seu nome de usuário" required {...register("email")}/>
+        <label htmlFor="password">Senha</label>
+        <input type="password" id="password" placeholder="Digite sua senha" required {...register("password")}/>
         <span>
-          <p>Esqueceu a senha? <a href="">Clique aqui</a></p>
+          <p>Esqueceu a senha? <a>Clique aqui</a></p>
         </span>
         <button type="submit" className="btn_login">Entrar</button>
         <Link to={`/Register`} className="toGoRegister">

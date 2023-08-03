@@ -18,7 +18,7 @@ const createUserService = async (
   });
 
   if (findUser) {
-    throw new AppError("User already exists", 409);
+    throw new AppError(" User already exists",409);
   }
 
   data.password = await hash(data.password, 10)

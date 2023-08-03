@@ -14,7 +14,7 @@ const createUserController = async (req: Request, res: Response) => {
 };
 
 const listUserController = async (req: Request, res: Response) => {
-  const userId = req.params.id
+  const userId = res.locals.userId
   const user = await listUserService(Number(userId))
 
   return res.json(user)

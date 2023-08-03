@@ -4,8 +4,8 @@ const contactSchema = z.object({
     id: z.number(),
     full_name: z.string(),
     email: z.string().email(),
-    phone: z.number(),
-    createAt: z.string().optional(),
+    phone: z.string(),
+    createAt: z.date().optional(),
   });
   
   const contactSchemaRequest = contactSchema.omit({

@@ -3,6 +3,7 @@ import { AppDataSource } from "../../data-source";
 import { User } from "../../entities/users.entitie";
 import { TUserResponse, TUserUpdate } from "../../interfaces/users.interface";
 import { userSchemaResponse } from "../../schemas/user.schema";
+import { hashSync } from "bcrypt";
 
 const updateUserService = async (
   data: TUserUpdate,
@@ -14,16 +15,23 @@ const updateUserService = async (
     id: id,
   });
 
-  const updateUser = userRepository.create({
-    ...oldData,
-    ...data,
-  });
+  try {
+    if(data.password){
+      data.password = hashSync(data.password, 10)
+    }
+    const updateUser = userRepository.create({
+      ...oldData,
+      ...data,
+    });
+  
+    await userRepository.save(updateUser);
+    return userSchemaResponse.parse(updateUser);
 
-  await userRepository.save(updateUser);
+  } catch (error: any) {
+    console.log(error);
+    throw new Error(error.message);
+  }
 
-  const returnUserUpdate: TUserResponse = userSchemaResponse.parse(updateUser);
-
-  return returnUserUpdate;
 };
 
 export { updateUserService };

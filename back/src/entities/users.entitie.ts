@@ -7,7 +7,6 @@ import {
   OneToMany,
   PrimaryGeneratedColumn,
 } from "typeorm";
-import { getRounds, hashSync } from "bcrypt";
 import { Contact } from "./contact.entitie";
 @Entity("users")
 class User {
@@ -20,26 +19,17 @@ class User {
   @Column({ unique: true })
   email: string;
 
-  @Column({ type: "int" })
-  phone: number;
+  @Column()
+  phone: string;
 
   @Column()
   password: string;
 
-  @CreateDateColumn({ type: "date" })
-  createdAt: string;
+  @CreateDateColumn({nullable: true})
+  createdAt: Date;
 
-  @BeforeInsert()
-  @BeforeUpdate()
-  hashPassword() {
-    const isEncripted = getRounds(this.password);
 
-    if (!isEncripted) {
-      this.password = hashSync(this.password, 10);
-    }
-  }
-
-  @OneToMany(()=> Contact, contact => contact.user)
+  @OneToMany(()=> Contact, contact => contact.user, { eager: true })
   contacts: Contact[]
 }
 
