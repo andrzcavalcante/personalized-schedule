@@ -9,7 +9,11 @@ Abaixo estará toda organização e explicação do funcionamento da API(Schedul
 ## Passos para rodar a aplicaçâo
 - Crie o clone do repositório na sua máquina.
 - No código, use o terminal para entrar na pasta do front:
-      - | cd front/ |
+   -  **cd front/**
+   -  faça a instalação de todas as dependências:
+        -  **npm install** ou **yarn install**
+
+       
 
 ## BackEnd
 
