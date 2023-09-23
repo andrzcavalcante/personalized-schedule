@@ -6,7 +6,7 @@ Neste repositório está toda estrutura da aplicação *SchedulesUp* do FrontEnd
 sempre presando os pilares da segurança da informação: confidencialidade, integridade e disponibilidade.
 Abaixo estará toda organização e explicação do funcionamento da API(SchedulesUp) e detalhes de uso do FrontEnd. 
 
-## Passos para rodar a aplicaçâo
+## Passos para rodar a aplicação
 
 #### BackEnd
 
