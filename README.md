@@ -10,16 +10,7 @@ Abaixo estará toda organização e explicação do funcionamento da API(Schedul
 
 #### BackEnd
 
-- Crie o clone do repositório na sua máquina.
-- No código, use o terminal para entrar na pasta do back:
-   -  **cd back/**.
-   -  Faça a instalação de todas as dependências:
-        -  **npm install** ou **yarn install**.
-        -  Configure o arquivo ***.env*** use o **env.exemplo** como base.
-   - Após, use os seguintes comandos:
-        - Transpilando o código para JavaScript: **npm run build** ou **yarn run**.
-        - Executando as migrações a partir do arquivo transpilado: npm run typeorm migration:run -- -d dist/data-source.js .
-        - **npm run start**
+Passando por manutenções no momento...
 
 
 #### FrontEnd
